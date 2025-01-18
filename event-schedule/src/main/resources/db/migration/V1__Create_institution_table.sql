@@ -1,0 +1,7 @@
+CREATE SEQUENCE institution_id_seq START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE CACHE 1;
+
+CREATE TABLE institutions (
+    id INTEGER PRIMARY KEY DEFAULT nextval('institution_id_seq'),
+    name VARCHAR(255) NOT NULL,
+    type VARCHAR(50) NOT NULL
+);
