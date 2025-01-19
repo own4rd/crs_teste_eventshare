@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,5 +38,11 @@ public class EventController {
     @GetMapping
     public ResponseEntity<List<EventResponseDto>> findAll(@RequestParam(value = "active", required = false) Boolean activeFilter) {
         return ResponseEntity.ok(eventService.findAll(activeFilter));
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> removeEvent(@PathVariable("id") Long id) {
+        eventService.deleteEvent(id);
+        return ResponseEntity.noContent().build();
     }
 }

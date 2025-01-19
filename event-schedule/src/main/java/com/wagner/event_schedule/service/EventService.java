@@ -8,4 +8,6 @@ import java.util.List;
 public interface EventService {
     void createEvent(CreateEventRequestDto createEventRequestDto);
     List<EventResponseDto> findAll(Boolean activeFilter);
+
+    void deleteEvent(Long id);
 }

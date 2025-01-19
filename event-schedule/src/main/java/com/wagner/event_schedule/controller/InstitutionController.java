@@ -15,7 +15,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("events/api/v1/institutions")
+@RequestMapping("event/api/v1/institutions")
 @Tag(name = "Instituições", description = "Endpoints para gerenciar instituições")
 public class InstitutionController {
 
@@ -47,4 +47,6 @@ public class InstitutionController {
         var institutions = institutionService.findAllInstitutions();
         return ResponseEntity.ok(institutions);
     }
+
+
 }

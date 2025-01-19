@@ -54,4 +54,12 @@ public class EventServiceImpl implements EventService {
 
         return events.stream().map(eventMapper::toEventResponseDto).toList();
     }
+
+    @Override
+    public void deleteEvent(Long id) {
+        Event event = eventRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Evento não encontrado"));
+
+        eventRepository.delete(event);
+    }
 }
