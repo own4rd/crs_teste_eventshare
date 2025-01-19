@@ -1,6 +1,9 @@
 
 # README - Sistema de Gestão de Eventos - BACKEND
 
+
+![Exemplo Documentação](../docs/documentacao_api.png)
+
 Descrição
 O Sistema de Gestão de Eventos é uma aplicação backend desenvolvida para gerenciar o agendamento de eventos. Através deste sistema, é possível registrar eventos com suas respectivas datas e horas e, com isso, monitorar esses eventos para garantir que, ao atingir a data e hora definidas, o status do evento seja automaticamente alterado para ativo.
 
