@@ -25,5 +25,5 @@ API Documentada com Swagger: A API está documentada com Swagger, permitindo fá
 # Configurando Aplicação com docker
 
 ```shell
-docker-compose up -d
+docker-compose -f docker-compose-dev.yml up -d
 ```
