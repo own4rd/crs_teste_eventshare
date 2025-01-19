@@ -81,4 +81,17 @@ public class EventController {
         EventResponseDto updatedEvent = eventService.updateEvent(updateEventRequestDto);
         return ResponseEntity.ok(updatedEvent);
     }
+
+    @Operation(summary = "Obter evento por ID", description = "Recupera as informações de um evento com base no ID fornecido.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Evento encontrado",
+                    content = @io.swagger.v3.oas.annotations.media.Content(mediaType = "application/json",
+                            schema = @Schema(implementation = EventResponseDto.class))),
+            @ApiResponse(responseCode = "404", description = "Evento não encontrado")
+    })
+    @GetMapping("/{id}")
+    public ResponseEntity<EventResponseDto> findOneById(@PathVariable Long id) {
+        EventResponseDto event = eventService.findOneById(id);
+        return ResponseEntity.ok(event);
+    }
 }

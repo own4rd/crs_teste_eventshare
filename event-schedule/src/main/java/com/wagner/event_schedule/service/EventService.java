@@ -11,4 +11,5 @@ public interface EventService {
     List<EventResponseDto> findAll(Boolean activeFilter);
     void deleteEvent(Long id);
     EventResponseDto updateEvent(UpdateEventRequestDto updateEventRequestDto);
+    EventResponseDto findOneById(Long id);
 }

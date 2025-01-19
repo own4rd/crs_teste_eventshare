@@ -82,6 +82,14 @@ public class EventServiceImpl implements EventService {
         return eventMapper.toEventResponseDto(updatedEvent);
     }
 
+    @Override
+    public EventResponseDto findOneById(Long id) {
+        Event event = eventRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Evento não encontrado"));
+
+        return eventMapper.toEventResponseDto(event);
+    }
+
     private Boolean eventIsActive(LocalDate startDate, LocalDate endDate) {
         LocalDate today = LocalDate.now();
         return !today.isBefore(startDate) && !today.isAfter(endDate);
