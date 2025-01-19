@@ -81,7 +81,7 @@ public class EventServiceTest {
         CreateEventRequestDto createEventRequestDto = new CreateEventRequestDto(
                 1L,
                 "Evento Teste",
-                LocalDate.of(2025, 1, 21), // Start date after end date
+                LocalDate.of(2025, 1, 21),
                 LocalDate.of(2025, 1, 20)
         );
 
