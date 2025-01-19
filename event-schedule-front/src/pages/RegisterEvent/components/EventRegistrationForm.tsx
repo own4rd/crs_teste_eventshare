@@ -36,7 +36,7 @@ const EventRegistrationForm: React.FC = () => {
 
     await submitEvent(data);
 
-    if(error != null) {
+    if(error == null) {
 
       setSuccessMessage('Evento registrado com sucesso!');
       reset({
