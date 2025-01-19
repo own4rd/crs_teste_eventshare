@@ -15,7 +15,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("event/api/v1/institutions")
+@RequestMapping("events/api/v1/institutions")
 @Tag(name = "Instituições", description = "Endpoints para gerenciar instituições")
 public class InstitutionController {
 
