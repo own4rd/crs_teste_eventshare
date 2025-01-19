@@ -1,6 +1,7 @@
 package com.wagner.event_schedule.service.impl;
 
 import com.wagner.event_schedule.dtos.v1.requests.CreateEventRequestDto;
+import com.wagner.event_schedule.dtos.v1.requests.UpdateEventRequestDto;
 import com.wagner.event_schedule.dtos.v1.responses.EventResponseDto;
 import com.wagner.event_schedule.exceptions.ResourceNotFoundException;
 import com.wagner.event_schedule.model.entity.Event;
@@ -30,8 +31,7 @@ public class EventServiceImpl implements EventService {
         Institution institution = institutionRepository.findById(createEventRequestDto.institutionId())
                 .orElseThrow(() -> new ResourceNotFoundException("Instituição não encontrada"));
 
-        LocalDate today = LocalDate.now();
-        boolean isActive = !today.isBefore(createEventRequestDto.startDate()) && !today.isAfter(createEventRequestDto.endDate());
+        boolean isActive = eventIsActive(createEventRequestDto.startDate(), createEventRequestDto.endDate());
         Event event = Event.builder()
                 .name(createEventRequestDto.name())
                 .startDate(createEventRequestDto.startDate())
@@ -61,5 +61,29 @@ public class EventServiceImpl implements EventService {
                 .orElseThrow(() -> new ResourceNotFoundException("Evento não encontrado"));
 
         eventRepository.delete(event);
+    }
+
+    @Override
+    public EventResponseDto updateEvent(UpdateEventRequestDto updateEventRequestDto) {
+        Event existingEvent = eventRepository.findById(updateEventRequestDto.institutionId())
+                .orElseThrow(() -> new ResourceNotFoundException("Evento não encontrado"));
+        Institution institution = institutionRepository.findById(updateEventRequestDto.institutionId())
+                .orElseThrow(() -> new ResourceNotFoundException("Instituição não encontrada"));
+
+        boolean isActive = eventIsActive(updateEventRequestDto.startDate(), updateEventRequestDto.endDate());
+        existingEvent.setName(updateEventRequestDto.name());
+        existingEvent.setStartDate(updateEventRequestDto.startDate());
+        existingEvent.setEndDate(updateEventRequestDto.endDate());
+        existingEvent.setActive(isActive);
+        existingEvent.setInstitution(institution);
+
+        Event updatedEvent = eventRepository.save(existingEvent);
+
+        return eventMapper.toEventResponseDto(updatedEvent);
+    }
+
+    private Boolean eventIsActive(LocalDate startDate, LocalDate endDate) {
+        LocalDate today = LocalDate.now();
+        return !today.isBefore(startDate) && !today.isAfter(endDate);
     }
 }
